@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { UserModel } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { UniqueConstraintError } = require('sequelize');
+const { UniqueConstraintError } = require('sequelize/lib/errors');
 // let bOne = bcrypt.hashSync('password123', 13);
 // let bTwo = bcrypt.hashSync('abc123', 13);
 // console.log('B-ONE: ', bOne);

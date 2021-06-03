@@ -4,7 +4,7 @@ const router = require('express').Router();
 const { PieModel } = require('../models');
 const middleware = require('../middleware'); 
 // router.get('/', (req, res) => res.send('I love pies!'));
-router.get('/', async(req, res) => {
+router.get('/all', async(req, res) => {
     try {
         const allPies = await PieModel.findAll();
         res.status(200).json(allPies);
@@ -36,7 +36,7 @@ router.post('/', middleware.validateSession, async(req,res) => {
         crust,
         timeToBake,
         servings,
-        rating
+        ratings
     } = req.body
     try {
         const Pie = await PieModel.create({
@@ -45,7 +45,7 @@ router.post('/', middleware.validateSession, async(req,res) => {
             crust,
             timeToBake,
             servings,
-            rating
+            ratings
         })
         res.status(201).json({
             msg: `Pie successfully created!`,
@@ -59,11 +59,11 @@ router.post('/', middleware.validateSession, async(req,res) => {
 })
 router.put('/:id', middleware.validateSession, async(req,res) => {
     const {
-        nameOfPie, baseOfPie, crust, timeToBake, servings, rating
+        nameOfPie, baseOfPie, crust, timeToBake, servings, ratings
     } = req.body
     try{
         const pieUpdated = await PieModel.update(
-            {nameOfPie, baseOfPie, crust, timeToBake, servings, rating},
+            {nameOfPie, baseOfPie, crust, timeToBake, servings, ratings},
             {where: {id: req.params.id}}
             )
             res.status(200).json({
